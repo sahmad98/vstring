@@ -36,11 +36,19 @@ int stoi(const char* str) {
     int remainder = len % VEC_WIDTH;
     if (len / VEC_WIDTH) {
         for (int i = 0; i < len / VEC_WIDTH; i++) {
-            xmm_i zero = _mm_set1_epi32('0');
+#ifdef __AVX2__
+            ymm_i zero = _mm256_set1_epi32(kZero);
+            xmm_i string_packed = _mm_loadu_si128((const __m128i_u*)(str_ptr + i * VEC_WIDTH);
+            ymm_i chr = _mm256_cvtepi8_epi32(string_packed);
+            ymm_i dig = _mm256_sub_epi32(chr, zero);
+            _mm256_store_si256((ymm_i*)(digits + i * VEC_WIDTH), dig);
+#elif __AVX__
+            xmm_i zero = _mm_set1_epi32(kZero);
             xmm_i string_packed = _mm_loadu_si128((const __m128i_u*)(str_ptr + i * VEC_WIDTH));
             xmm_i chr = _mm_cvtepi8_epi32(string_packed);
             xmm_i dig = _mm_sub_epi32(chr, zero);
             _mm_store_si128((xmm_i *)(digits + i * VEC_WIDTH), dig);
+#endif
         }
     }
 
