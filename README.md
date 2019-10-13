@@ -44,7 +44,7 @@ NUMA node0 CPU(s):   0-3
 Memory Size:         8 GB
 ```
 
-Benchmark Results
+### Benchmark Results
 
 `stoi` ran on all digits from 0 to 10. Following are stoi  benchmark implementations
 
