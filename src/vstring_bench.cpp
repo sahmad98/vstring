@@ -1,8 +1,9 @@
 #include <benchmark/benchmark.h>
-#include <string>
+// #include <string>
 #include <cstring>
 #include <omp.h>
 #include "vstring.hpp"
+#include "tests/vstring_strlen_bench.hpp"
 
 static const int kArgs = 10;
 static const char* str[kArgs] = {

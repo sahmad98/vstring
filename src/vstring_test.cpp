@@ -1,5 +1,6 @@
 #include "vstring.hpp"
 #include <gtest/gtest.h>
+#include "tests/vstring_strlen_test.hpp"
 
 static constexpr int kArgs = 10;
 static const char* pos_str[kArgs] = {
